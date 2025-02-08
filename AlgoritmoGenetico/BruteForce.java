@@ -1,8 +1,5 @@
 package AlgoritmoGenetico;
 
-import java.util.ArrayList;
-import java.util.List;
-
 //Resolvendo o problema do Knapsack por forca bruta, enunciado no arquivo byHand.txt
 public class BruteForce {
 
