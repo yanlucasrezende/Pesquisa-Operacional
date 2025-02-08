@@ -1,0 +1,184 @@
+Yan Lucas Rezende - 20221011090310
+
+KnapSack Problem
+
+Um ladrão invade uma casa e se depara com 5 itens para se furtar, porém sua mochila possui
+uma limitação de peso, podendo suportar apenas 14Kg. Qual a melhor combinação de itens para
+levar em sua mochila de forma que não ultrapasse o limite de peso mas maximize seu ganho.
+
+Escolhas arbitrárias:
+
+Item 1 -> 4Kg e R$ 10.00;
+Item 2 -> 2Kg e R$ 6.00;
+Item 3 -> 6Kg e R$ 11.00;
+Item 4 -> 3Kg e R$ 6.00;
+Item 5 -> 5Kg e R$ 9.00;
+
+Número de gerações: 6;
+Tamanho da população: 4;
+Taxa de crossover: 90%;
+Taxa de mutação: 10%;
+
+Fitness Function ( alias ff() ):
+
+funcaoFitness ( individuo[] indiv){
+    int benefict = 0;
+    for ( int posicao = 0; posicao < indiv.size; posicao ++ ){
+        if( indiv[posicao] == 1 ){
+            benefict += bVector[posicao];
+        }
+    }
+    return benefict;
+}
+
+
+Resolução por Algoritmo Genético:
+
+Considerações:
+Os sorteios foram realizados utilizando um sorteado de número online de 0 a 10, para verificação de crossover e mutação;
+Os sorteios foram realizados utilizando um sorteado de número online de 1 a 4, para decidir casais;
+Os sorteios foram realizados utilizando um sorteado de número online de 1 a 2, para decidir casais;
+Os sorteios foram realizados utilizando um sorteado de número online de 0 a 4, para decidir os pontos de corte e local de mutação;
+Se o ponto de corte sorteado foi 1, significa que o primeiro filho terá a primeiro
+bit do array do pai e o restante da mãe e o para o segundo filho terá um outro sorteio;
+
+
+Vetor de benefícios: [ 10, 6, 11, 6, 9 ] -> alias bVector
+Vetor de custo: [ 4, 2, 6, 3, 5 ] -> alias cVector
+
+Melhor indivíduo (alias bestChoice) = [ 0, 0, 0, 0, 0 ];
+
+Geração 1:
+
+Indiv. 1: [ 1, 0, 0, 1, 1 ] -> alias indiv1
+Indiv. 2: [ 0, 1, 1, 1, 0 ] -> alias indiv2
+Indiv. 3: [ 1, 0, 1, 0, 1 ] -> alias indiv3
+Indiv. 4: [ 0, 1, 0, 1, 0 ] -> alias indiv4
+
+Resultados da geração:
+
+Indiv. 1: Benefict = R$ 25.00 // Cost = 12Kg
+Indiv. 2: Benefict = R$ 23.00 // Cost = 11Kg
+Indiv. 3: Benefict = R$ 30.00 // Cost = 15Kg
+Indiv. 4: Benefict = R$ 12.00 // Cost = 5Kg
+
+bestChoice = [ 1, 0, 0, 1, 1 ] = Benefict = R$ 25.00 // Cost = 12Kg;
+
+Geração 2:
+
+Casais:
+Casal 1 = indiv2 e indiv4;
+Casal 2 = indiv1 e indiv3;
+
+Ponto de corte = 2 e 3;
+
+Indiv. 1: [ 0, 1, 0, 1, 0 ] -> alias indiv1
+Indiv. 2: [ 0, 1, 1, 1, 0 ] -> alias indiv2
+Indiv. 3: [ 1, 0, 1, 0, 1 ] -> alias indiv3
+Indiv. 4: [ 1, 0, 0, 0, 1 ] -> alias indiv4
+
+Indiv. 1: Benefict = R$ 12.00 // Cost = 5Kg
+Indiv. 2: Benefict = R$ 23.00 // Cost = 11Kg
+Indiv. 3: Benefict = R$ 30.00 // Cost = 15Kg
+Indiv. 4: Benefict = R$ 19.00 // Cost = 9Kg
+
+-> Nenhum indivíduo supera bestChoice;
+
+Geração 3:
+
+Casais:
+Casal 1 = indiv2 e indiv3;
+Casal 2 = indiv1 e indiv4;
+
+Ponto de corte = 3 e 4;
+
+Indiv. 1: [ 0, 1, 1, 0, 1 ] -> alias indiv1
+Indiv. 2: [ 0, 1, 1, 1, 1 ] -> alias indiv2
+Indiv. 3: [ 0, 1, 0, 0, 1 ] -> alias indiv3
+Indiv. 4: [ 0, 1, 0, 1, 1 ] -> alias indiv4
+
+Indiv. 1: Benefict = R$ 26.00 // Cost = 13Kg
+Indiv. 2: Benefict = R$ 32.00 // Cost = 16Kg
+Indiv. 3: Benefict = R$ 14.00 // Cost = 7Kg
+Indiv. 4: Benefict = R$ 21.00 // Cost = 10Kg
+
+bestChoice = [ 0, 1, 1, 0, 1 ] = Benefict = R$ 26.00 // Cost = 13Kg;
+
+
+Geração 4:
+
+Casais:
+Casal 1 = indiv1 e indiv3;
+Casal 2 = indiv2 e indiv4;
+
+indiv2 -> Mutação sim, inverter bit posição 4 -> [ 0, 1, 1, 0, 1 ]
+
+Ponto de corte = 1 e 2;
+
+Indiv. 1: [ 0, 1, 0, 0, 1 ] -> alias indiv1
+Indiv. 2: [ 0, 1, 0, 0, 1 ] -> alias indiv2
+Indiv. 3: [ 0, 1, 0, 1, 1 ] -> alias indiv3
+Indiv. 4: [ 0, 1, 0, 1, 1 ] -> alias indiv4
+
+Indiv. 1: Benefict = R$ 15.00 // Cost = 7Kg
+Indiv. 2: Benefict = R$ 15.00 // Cost = 7Kg
+Indiv. 3: Benefict = R$ 21.00 // Cost = 10Kg
+Indiv. 4: Benefict = R$ 21.00 // Cost = 10Kg
+
+-> Nenhum indivíduo supera bestChoice;
+
+Geração 5:
+
+Casais:
+Casal 1 = indiv1 e indiv3;
+Casal 2 = indiv2 e indiv4;
+
+indiv1 -> Mutação sim, inverter bit posição 1 -> [ 1, 1, 0, 0, 1 ]
+
+Ponto de corte = 3 e 4;
+
+Indiv. 1: [ 1, 1, 0, 1, 1 ] -> alias indiv1
+Indiv. 2: [ 1, 1, 0, 0, 1 ] -> alias indiv2
+Indiv. 3: [ 0, 1, 0, 1, 1 ] -> alias indiv3
+Indiv. 4: [ 0, 1, 0, 0, 1 ] -> alias indiv4
+
+Indiv. 1: Benefict = R$ 31.00 // Cost = 14Kg
+Indiv. 2: Benefict = R$ 25.00 // Cost = 11Kg
+Indiv. 3: Benefict = R$ 21.00 // Cost = 10Kg
+Indiv. 4: Benefict = R$ 15.00 // Cost = 7Kg
+
+bestChoice = [ 1, 1, 0, 1, 1 ] = Benefict = R$ 31.00 // Cost = 14Kg;
+
+Geração 6:
+
+Casais:
+Casal 1 = indiv1 e indiv2;
+Casal 2 = indiv3 e indiv4;
+
+indiv1 -> Mutação sim, inverter bit posição 3 -> [ 1, 1, 1, 1, 1 ]
+
+Ponto de corte = 2 e 4;
+
+Indiv. 1: [ 1, 1, 0, 0, 1 ] -> alias indiv1
+Indiv. 2: [ 1, 1, 1, 1, 1 ] -> alias indiv2
+Indiv. 3: [ 0, 1, 0, 0, 1 ] -> alias indiv3
+Indiv. 4: [ 0, 1, 0, 1, 1 ] -> alias indiv4
+
+Indiv. 1: Benefict = R$ 25.00 // Cost = 11Kg
+Indiv. 2: Benefict = R$ 43.00 // Cost = 20Kg
+Indiv. 3: Benefict = R$ 15.00 // Cost = 7Kg
+Indiv. 4: Benefict = R$ 21.00 // Cost = 10Kg
+
+-> Nenhum indivíduo supera bestChoice;
+
+
+Resultado final
+A melhor escolha encontrada para 6 gerações, população de 4 indivíduos foi:
+
+Item 1 -> 4Kg e R$ 10.00 -> SIM
+Item 2 -> 2Kg e R$ 6.00 -> SIM
+Item 3 -> 6Kg e R$ 11.00 -> NÃO
+Item 4 -> 3Kg e R$ 6.00 -> SIM
+Item 5 -> 5Kg e R$ 9.00 -> SIM
+
+Totalizando um peso de 14Kg e lucro total de R$ 31.00;
