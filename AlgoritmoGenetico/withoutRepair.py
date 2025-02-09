@@ -9,6 +9,11 @@ CHOICES_SIZE = 5
 TAXA_CROSSOVER = 0.9
 TAXA_MUTATION = 0.1
 
+# Esta implementacao do algoritmo genetico nao se da com reparo, ou seja,
+# quando um individuo gerado nao atender as restricoes ele sera podera
+# ter filhos porem nao sera inserido como melhor escolha caso nao haja solucao
+# que atenda as restricoes
+
 class Individuo:
     def __init__(self, choice):
         self.choice = choice
@@ -34,7 +39,7 @@ def fitnessFunction(individuo):
 
 def calcularCusto(individuo):
     custo = 0
-    for valuePosi in range(CHOICES_SIZE):
+    for valuePosi in range(len(individuo.choice)):
         if individuo.choice[valuePosi] == 1:
             custo += COST_ARRAY[valuePosi]
     return custo
@@ -110,7 +115,7 @@ for row in range(NUMBER_GENS):
             else:
                 matriz[row][col] = pai2
                 matriz[row][col] = mae2
-    continue
+        continue
 
 print("Melhor escolha: ", BEST_CHOICE.get_escolha())
 print("Beneficio: ", BEST_CHOICE.get_beneficio())
