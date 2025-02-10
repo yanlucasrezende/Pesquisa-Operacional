@@ -1,4 +1,4 @@
-package AlgoritmoGenetico;
+package AlgoritmoGenetico.KnapSack;
 
 //Resolvendo o problema do Knapsack por forca bruta, enunciado no arquivo byHand.txt
 public class BruteForce {
