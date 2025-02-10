@@ -57,8 +57,8 @@ matriz = [[None for _ in range(SIZE_POPULATION)] for _ in range(NUMBER_GENS)]
 
 
 for row in range(NUMBER_GENS):
+    pularParaProximaIteracao = False
     for col in range(SIZE_POPULATION):
-        pularParaProximaIteracao = False
         if pularParaProximaIteracao:
             continue
         if row == 0:
