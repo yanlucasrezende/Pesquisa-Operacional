@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otimização de Mochila</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-2xl">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-200 pb-4">
+            Problema da Mochila - Resolução por Sorteio
+        </h1>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Itens Disponíveis</h2>
+                <ul class="space-y-3">
+                    <li class="text-gray-600 p-3 bg-gray-50 rounded-lg">Item 1 → 4Kg e R$ 10.00</li>
+                    <li class="text-gray-600 p-3 bg-gray-50 rounded-lg">Item 2 → 2Kg e R$ 6.00</li>
+                    <li class="text-gray-600 p-3 bg-gray-50 rounded-lg">Item 3 → 6Kg e R$ 11.00</li>
+                    <li class="text-gray-600 p-3 bg-gray-50 rounded-lg">Item 4 → 3Kg e R$ 6.00</li>
+                    <li class="text-gray-600 p-3 bg-gray-50 rounded-lg">Item 5 → 5Kg e R$ 9.00</li>
+                </ul>
+            </div>
+
+            <form method="POST" class="self-center">
+                {% csrf_token %}
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold 
+                    py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    Realizar sorteio
+                </button>
+            </form>
+        </div>
+
+        {% if resultado %}
+        <div class="mt-8 p-6 bg-green-50 border-2 border-green-200 rounded-xl">
+            <h2 class="text-2xl font-bold text-green-800 mb-4">Resultado do Sorteio</h2>
+            <div class="space-y-4 text-green-700">
+                {{ resultado|linebreaks }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
