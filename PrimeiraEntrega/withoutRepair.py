@@ -100,8 +100,8 @@ for row in range(NUMBER_GENS):
                 matriz[row][indicesCasais[0]] = filho1
                 matriz[row][indicesCasais[1]] = filho2
             else:
-                matriz[row][col] = pai1
-                matriz[row][col] = mae1
+                matriz[row][indicesCasais[0]] = pai2
+                matriz[row][indicesCasais[1]] = mae2
 
             if random.uniform(0, 1) <= TAXA_CROSSOVER:
                 pontoCorte = random.randint(0, CHOICES_SIZE)
@@ -116,9 +116,9 @@ for row in range(NUMBER_GENS):
                 matriz[row][indicesCasais[2]] = filho3
                 matriz[row][indicesCasais[3]] = filho4
             else:
-                matriz[row][col] = pai2
-                matriz[row][col] = mae2
-        pularParaProximaIteracao = True
+                matriz[row][indicesCasais[2]] = pai2
+                matriz[row][indicesCasais[3]] = mae2
+    pularParaProximaIteracao = True
 
 print("Melhor escolha: ", BEST_CHOICE.get_escolha())
 print("Beneficio: ", BEST_CHOICE.get_beneficio())
