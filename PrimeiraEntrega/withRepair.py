@@ -57,10 +57,10 @@ matriz = [[None for _ in range(SIZE_POPULATION)] for _ in range(NUMBER_GENS)]
 
 
 for row in range(NUMBER_GENS):
-    pularParaProximaIteracao = False
+    #pularParaProximaIteracao = False
     for col in range(SIZE_POPULATION):
-        if pularParaProximaIteracao:
-            continue
+        #if pularParaProximaIteracao:
+            #continue
         if row == 0:
             indiv = Individuo([sortearValorPosicao() for i in range(CHOICES_SIZE)])
             # REPARO
@@ -160,7 +160,7 @@ for row in range(NUMBER_GENS):
             else:
                 matriz[row][indicesCasais[2]] = pai2
                 matriz[row][indicesCasais[3]] = mae2
-    pularParaProximaIteracao = True
+    #pularParaProximaIteracao = True
 
 
 print("Melhor escolha: ", BEST_CHOICE.get_escolha())

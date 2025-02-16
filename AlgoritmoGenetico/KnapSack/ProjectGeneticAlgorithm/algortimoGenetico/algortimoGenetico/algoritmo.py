@@ -31,7 +31,6 @@ def algoritmo_forca_bruta():
             self.custo = calcularCusto(self)
 
         def __str__(self):
-            # Formata a lista de escolhas com Sim/Não
             itens = [
                 f"Item {i+1}: {'Sim' if val == 1 else 'Não'}"
                 for i, val in enumerate(self.choice)
@@ -64,12 +63,11 @@ def algoritmo_forca_bruta():
 
     matriz = [[None for _ in range(SIZE_POPULATION)] for _ in range(NUMBER_GENS)]
 
-
     for row in range(NUMBER_GENS):
-        pularParaProximaIteracao = False
+        #pularParaProximaIteracao = False
         for col in range(SIZE_POPULATION):
-            if pularParaProximaIteracao:
-                continue
+            #if pularParaProximaIteracao:
+                #continue
             if row == 0:
                 indiv = Individuo([sortearValorPosicao() for i in range(CHOICES_SIZE)])
                 # REPARO
@@ -169,8 +167,16 @@ def algoritmo_forca_bruta():
                 else:
                     matriz[row][indicesCasais[2]] = pai2
                     matriz[row][indicesCasais[3]] = mae2
-        pularParaProximaIteracao = True
-    return str(BEST_CHOICE)
+        #pularParaProximaIteracao = True
+    historia = []
+    for i in range(NUMBER_GENS):
+        historia.append(f"Geração {i+1}\n")
+        for j in range(SIZE_POPULATION):
+            historia.append(f"Indiv. {j+1}\n")
+            historia.append(str(matriz[i][j]))
+            historia.append("\n")
+    historia.append(f"Melhor escolha: \n{BEST_CHOICE}")
+    return "\n".join(historia)
 
 if __name__ == "__main__":
     print(algoritmo_forca_bruta())
