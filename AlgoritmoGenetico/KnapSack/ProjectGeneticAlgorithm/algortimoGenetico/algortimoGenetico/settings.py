@@ -15,12 +15,11 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6f#-5s2^ip*tpt3!*5@ev2bjc8a-#$74k0n2wajj+1)!ajquh6'
+SECRET_KEY = 'django-insecure-%9xu4+oy3j1xb(rw=cqk=@^dd_v%h7_c*@$7xu4%+na1bi^8ie'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -54,7 +53,7 @@ ROOT_URLCONF = 'algortimoGenetico.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "algortimoGenetico/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
